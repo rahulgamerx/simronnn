@@ -1,0 +1,164 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: Georgia, serif;
+  color: white;
+  background:
+    radial-gradient(circle at top, #702449, transparent 55%),
+    linear-gradient(135deg, #100b20, #281329, #100b20);
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.tag {
+  color: #ff9cbe;
+  font: 11px Arial;
+  letter-spacing: 5px;
+  margin-bottom: 22px;
+}
+
+h1 {
+  font-size: clamp(35px, 8vw, 65px);
+  text-shadow: 0 0 25px #ff398b;
+}
+
+h1 span {
+  color: #ff72a9;
+}
+
+.subtitle {
+  margin-top: 15px;
+  color: #e8b7cc;
+  font: 14px Arial;
+}
+
+.game {
+  position: relative;
+  width: min(90vw, 600px);
+  height: 260px;
+  margin: 30px auto;
+  touch-action: none;
+}
+
+.target {
+  position: absolute;
+  left: 80%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 90px;
+  filter: drop-shadow(0 0 25px #ff398b);
+  animation: heartbeat 1.3s infinite;
+}
+
+@keyframes heartbeat {
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+.arrow {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  font-size: 55px;
+  cursor: grab;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 0 12px pink);
+  touch-action: none;
+  user-select: none;
+}
+
+.result {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(.3);
+  pointer-events: none;
+}
+
+.result.show {
+  animation: reveal 1s forwards;
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.result h2 {
+  font-size: clamp(40px, 9vw, 75px);
+  text-shadow: 0 0 30px #ff4b91;
+}
+
+.result h3 {
+  color: #ff8bb8;
+  font-size: clamp(30px, 7vw, 55px);
+  margin-top: 10px;
+}
+
+.result p {
+  color: #ffd2e4;
+  margin-top: 15px;
+  font: 14px Arial;
+}
+
+.instruction {
+  color: #ffc2da;
+  font: 14px Arial;
+  margin-bottom: 20px;
+}
+
+button {
+  background: linear-gradient(135deg, #ff5d9c, #a91561);
+  color: white;
+  border: 1px solid #ffb3d0;
+  border-radius: 50px;
+  padding: 15px 30px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: 0 0 25px #ff398b66;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(.95);
+}
+
+@media(max-width:480px) {
+  .game {
+    height: 220px;
+  }
+
+  .target {
+    font-size: 72px;
+  }
+
+  .arrow {
+    font-size: 43px;
+  }
+
+  .tag {
+    letter-spacing: 3px;
+  }
+}

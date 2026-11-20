@@ -1,0 +1,103 @@
+
+const arrow = document.getElementById("arrow");
+const target = document.getElementById("target");
+const result = document.getElementById("result");
+const instruction = document.getElementById("instruction");
+const replay = document.getElementById("replay");
+const game = document.querySelector(".game");
+
+let dragging = false;
+let fired = false;
+let angle = 0;
+
+arrow.addEventListener("pointerdown", e => {
+  if (fired) return;
+  dragging = true;
+  arrow.setPointerCapture(e.pointerId);
+});
+
+arrow.addEventListener("pointermove", e => {
+  if (!dragging) return;
+
+  const rect = game.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  angle = Math.atan2(
+    y - rect.height / 2,
+    x - rect.width * .1
+  ) * 180 / Math.PI;
+
+  angle = Math.max(-40, Math.min(40, angle));
+
+  arrow.style.transform =
+    `translateY(-50%) rotate(${angle}deg)`;
+});
+
+arrow.addEventListener("pointerup", () => {
+  if (!dragging) return;
+
+  dragging = false;
+  fired = true;
+
+  instruction.textContent = "Arrow is flying... 💘";
+
+  const rect = game.getBoundingClientRect();
+
+  arrow.style.transition = "all .7s ease";
+  arrow.style.left = "80%";
+  arrow.style.top = "50%";
+  arrow.style.transform = "translate(-50%,-50%)";
+
+  setTimeout(() => {
+    arrow.style.opacity = "0";
+    target.style.opacity = "0";
+    result.classList.add("show");
+    instruction.textContent = "A message from my heart ❤️";
+    burst();
+  }, 700);
+});
+
+function burst() {
+  const icons = ["💖", "✨", "💕", "💗", "❤️"];
+
+  for (let i = 0; i < 35; i++) {
+    const el = document.createElement("span");
+    el.textContent = icons[i % icons.length];
+
+    el.style.position = "absolute";
+    el.style.left = "80%";
+    el.style.top = "50%";
+    el.style.fontSize = "24px";
+    el.style.pointerEvents = "none";
+    el.style.transition = "all 1s ease";
+
+    game.appendChild(el);
+
+    requestAnimationFrame(() => {
+      el.style.transform =
+        `translate(${Math.random()*300-150}px,
+        ${Math.random()*240-120}px) scale(1.5)`;
+      el.style.opacity = "0";
+    });
+
+    setTimeout(() => el.remove(), 1100);
+  }
+}
+
+replay.addEventListener("click", () => {
+  fired = false;
+  angle = 0;
+
+  arrow.style.transition = "none";
+  arrow.style.left = "5%";
+  arrow.style.top = "50%";
+  arrow.style.opacity = "1";
+  arrow.style.transform = "translateY(-50%)";
+
+  target.style.opacity = "1";
+  result.classList.remove("show");
+
+  instruction.textContent =
+    "Drag the arrow and hit the heart 🏹";
+});

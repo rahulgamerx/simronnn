@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Love Simron ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="hearts"></div>
+
+  <main class="container">
+    <div class="tag">A SPECIAL MESSAGE FOR YOU</div>
+
+    <h1>Hey Beautiful <span>❤️</span></h1>
+    <p class="subtitle">Someone has a little surprise for you...</p>
+
+    <div class="game">
+      <div class="target" id="target">💗</div>
+      <div class="arrow" id="arrow">➶</div>
+      <div class="result" id="result">
+        <h2>I LOVE</h2>
+        <h3>SIMRON 💖</h3>
+        <p>You are my favourite person ✨</p>
+      </div>
+    </div>
+
+    <p class="instruction" id="instruction">
+      Drag the arrow and hit the heart 🏹
+    </p>
+
+    <button id="replay">REPLAY MAGIC ↻</button>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
